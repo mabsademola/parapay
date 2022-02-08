@@ -2,105 +2,60 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:parapay/models/competition_model.dart';
 import 'package:parapay/provider/home_provider.dart';
+import 'package:parapay/screens/competitions.dart';
 import 'package:parapay/util/shimmer.dart';
 import 'package:provider/provider.dart';
 
-import 'teams.dart';
-
-class HomeScreens extends StatefulWidget {
-  const HomeScreens({Key key, @required this.id, @required this.name})
-      : super(key: key);
-  final int id;
-  final String name;
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key key}) : super(key: key);
 
   @override
-  _HomeScreensState createState() => _HomeScreensState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreensState extends State<HomeScreens> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<HomeProvider>(context, listen: false).getMatches(widget.id);
-    });
+    // SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+    //   Provider.of<HomeProvider>(context, listen: false).getCompetitions();
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<HomeProvider>(context);
-    var matches = provider.matches;
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.name + " Competitions"),
+        title: const Text('List Of Competitions'),
       ),
       body: !provider.isLoading
           ? ListView.builder(
-        itemCount: matches.length ?? 0,
-        itemBuilder: (context, index) {
-          final dss = matches[index];
-          return ListTile(
-            title: Row(
-              children: [
-                GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  Teamss(
-                                    name: dss.homeTeam.name,
-                                    id: dss.homeTeam.id,
-                                  )));
-                    },
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          dss.homeTeam.name,
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                    )),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
-                    "Vs",
-                    style: TextStyle(
-                        backgroundColor: Colors.green,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600),
+              itemCount: provider.competitions.length,
+              itemBuilder: (context, index) {
+                final dss = provider.competitions[index];
+                return ListTile(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Competions(
+                                  name: dss.name,
+                                  id: dss.area.id,
+                                )));
+                  },
+                  title: Text(
+                    dss.name,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
-                ),
-                GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  Teamss(
-                                    name: dss.awayTeam.name,
-                                    id: dss.awayTeam.id,
-                                  )));
-                    },
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          dss.awayTeam.name,
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                    )),
-              ],
-            ),
-          );
-        },
-      ) : Listshimmerr(),
+                  subtitle: Text(dss.area.name,
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+                );
+              },
+            )
+          : Listshimmer(),
     );
   }
 }

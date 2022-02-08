@@ -1,8 +1,4 @@
-// To parse this JSON data, do
-//
-//     final competitonmodel = competitonmodelFromJson(jsonString);
 
-import 'dart:convert';
 
 class Matches {
   int count;

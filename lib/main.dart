@@ -3,7 +3,7 @@ import 'package:parapay/provider/teams_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'provider/home_provider.dart';
-import 'screens/competition.dart';
+import 'screens/homescreen.dart';
 
 void main() {
   runApp(
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Competions(),
+      home: const HomeScreen(),
     );
   }
 }
