@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:parapay/models/competition_model.dart';
+
 import 'package:parapay/provider/home_provider.dart';
 import 'package:parapay/util/shimmer.dart';
 import 'package:provider/provider.dart';

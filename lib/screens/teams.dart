@@ -36,38 +36,38 @@ class _TeamssState extends State<Teamss> {
       body: !provider.isLoading
           ? ListView(children: [
               Row(children: [
-                // Container(
-                //   child: CachedNetworkImage(
-                //     imageUrl: ds.crestUrl,
-                //     fit: BoxFit.cover,
-                //   ),
-                // ),
+                Container(
+                  child: CachedNetworkImage(
+                    imageUrl: provider.team.crestUrl,
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 Column(
                   children: [
                     Text(provider.team.name, style: TextStyle(fontSize: 15)),
-                    // Text(ds.area.name, style: TextStyle(fontSize: 15)),
+                    Text(provider.team.area.name, style: TextStyle(fontSize: 15)),
                   ],
                 ),
               ]),
-              // Container(
-              //   child: Text("Team Squd", style: TextStyle(fontSize: 15)),
-              // ),
-              // Container(
-              //     child: ListView.builder(
-              //         itemCount: ds.squad.length,
-              //         itemBuilder: (context, index) {
-              //           final dss = ds.squad[index];
-              //           return Card(
-              //               child: Padding(
-              //             padding: const EdgeInsets.all(8.0),
-              //             child: Column(
-              //               children: [
-              //                 Text(dss.name, style: TextStyle(fontSize: 20)),
-              //                 SizedBox(height: 10),
-              //               ],
-              //             ),
-              //           ));
-              //         }))
+              Container(
+                child: Text("Team Squd", style: TextStyle(fontSize: 15)),
+              ),
+              Container(
+                  child: ListView.builder(
+                      itemCount: provider.team.squad.length,
+                      itemBuilder: (context, index) {
+                        final dss = provider.team.squad[index];
+                        return Card(
+                            child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Text(dss.name, style: TextStyle(fontSize: 20)),
+                              SizedBox(height: 10),
+                            ],
+                          ),
+                        ));
+                      }))
             ])
           : Center(
               child: const CircularProgressIndicator(),

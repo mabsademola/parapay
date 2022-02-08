@@ -84,22 +84,7 @@ class ApiService {
     if (response.statusCode == 200) {
       print(json.decode(response.body));
       return Teams.fromJson(json.decode(response.body));
-      //  var   matchesList = competitonss['activeCompetitions'];
-      // print(" Api Service 2 : $competitonss");
-
-      // List<dynamic> matchesList = competitonss['activeCompetitions'];
-      // print(" Api Service 3 : $matchesList");
-      // List<dynamic> matchesList = competitonss;
-      // Teams team = Teams.fromJson(matchesList);
-      // List<Teams> teams =
-      //     matchesList.map((dynamic item) => Teams.fromJson(item)).toList();
-
-      // final team = teams[0].name;
-
-      // print(" Api Service 4 : $team");
-      // Teams team = matchesList.map((dynamic item) => Teams.fromJson(item));
-      // print(" Api Service 4 : $team");
-      // return team;
+     
     } else {
       print(" no data");
     }
