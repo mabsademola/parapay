@@ -14,18 +14,12 @@ class ApiService {
     'X-Auth-Token': "72b09e03051f4009a4f6080adfebdb14",
     // 'X-API-Version': "v2"
   };
-  // List <Competitonmodel> competitons;
-  // List matches;
-
-  // http://api.football-data.org/v2/competitions/2003/matches?matchday=1
-
+ 
   Future<List<Match>> getMatches(int id) async {
-    // var url = Uri.http('api.football-data.org', 'v2/competitions/CL/matches',
-    //     {"matchday": "1"});
-
+   
     var url = Uri.http(
       'api.football-data.org', 'v2/competitions/$id/matches',
-      // {"matchday": "1"}
+     
     );
 
     final response = await get(url, headers: responseHeaders);
@@ -79,8 +73,7 @@ class ApiService {
 
     final response = await get(url, headers: responseHeaders);
 
-    // print(" Api Service 1 : $response");
-
+   
     if (response.statusCode == 200) {
       print(json.decode(response.body));
       return Teams.fromJson(json.decode(response.body));

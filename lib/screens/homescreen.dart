@@ -30,32 +30,38 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('List Of Competitions'),
       ),
-      body: !provider.isLoading
-          ? ListView.builder(
-              itemCount: provider.competitions.length,
-              itemBuilder: (context, index) {
-                final dss = provider.competitions[index];
-                return ListTile(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Competions(
-                                  name: dss.name,
-                                  id: dss.area.id,
-                                )));
-                  },
-                  title: Text(
-                    dss.name,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                  ),
-                  subtitle: Text(dss.area.name,
+      body: RefreshIndicator(
+        onRefresh: () async {
+          provider.getCompetitions();
+        },
+        child: !provider.isLoading
+            ? ListView.builder(
+                itemCount: provider.competitions.length,
+                itemBuilder: (context, index) {
+                  final dss = provider.competitions[index];
+                  return ListTile(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Competions(
+                                    name: dss.name,
+                                    id: dss.area.id,
+                                  )));
+                    },
+                    title: Text(
+                      dss.name,
                       style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-                );
-              },
-            )
-          : Listshimmer(),
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    ),
+                    subtitle: Text(dss.area.name,
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w500)),
+                  );
+                },
+              )
+            : Listshimmer(),
+      ),
     );
   }
 }
